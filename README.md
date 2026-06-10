@@ -4,6 +4,8 @@ Welcome! This is a partially-built Laravel application. The **back end is done f
 
 When you are finished you will have a working university management system with five modules: **Departments, Students, Courses, Professors,** and **Enrollments**.
 
+> 📚 **New to this pattern?** Read [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) to see how the pieces fit together, follow [`docs/ADDING-A-CRUD-MODULE.md`](docs/ADDING-A-CRUD-MODULE.md) for a full worked example, and keep [`docs/CHEATSHEET.md`](docs/CHEATSHEET.md) open while you build.
+
 ---
 
 ## What is already provided (do NOT change these)
