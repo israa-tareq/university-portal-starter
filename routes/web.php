@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | YOUR TASK — register the routes
@@ -38,3 +39,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 // TODO: write your routes below this line.
+
+Route::get('/', function () {
+    return view('layouts.layout');
+});
+
+Route::get('css/layout.css', function () {
+    $path = resource_path('css/layout.css');
+    return response(file_get_contents($path), 200)
+        ->header('Content-Type', 'text/css');
+});
+
+Route::get('js/layout.js', function () {
+    $path = resource_path('js/layout.js');
+    return response(file_get_contents($path), 200)
+        ->header('Content-Type', 'application/javascript');
+});
+
+Route::resource('departments', DepartmentController::class)->except('show');
+Route::resource('students', StudentController::class)->except('show');
+Route::resource('courses', CourseController::class)->except('show');
+Route::resource('professors', ProfessorController::class)->except('show');
+Route::resource('enrollments', EnrollmentController::class)->except('show');

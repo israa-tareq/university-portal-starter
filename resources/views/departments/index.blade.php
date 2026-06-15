@@ -1,18 +1,23 @@
-{{--
-    YOUR TASK (W10 + W13):  list every department.
+@extends('layouts.layout')
 
-    The controller passes in:
-        $departments  — an array of App\DTOs\DepartmentDTO
+@section('title', 'Page Title Here')
 
-    Each DepartmentDTO gives you:  getId(), getName()
+@section('content')
+    
+    <div class="department-section">
+        <div class="Department-Title-And-Logo">
+            <p>Departments</p>
+        </div>
+        <div class="Search-card">
 
-    Build:
-        - @extends('layouts.app') with a @section('content')
-        - loop the array with @foreach and show each department (a table works well)
-        - an "Edit" link   -> route('departments.edit', $department->getId())
-        - a "Delete" button: a <form> with method="POST" + @csrf + @method('DELETE'),
-              action -> route('departments.destroy', $department->getId())
-        - a "New Department" link -> route('departments.create')
+        </div>
+    </div>   
+@endsection
 
-    TODO: build the view here.
---}}
+@push('styles')
+    <link rel="stylesheet" href="{{ url('css/yourpage.css') }}">
+@endpush
+
+@push('scripts')
+    <script src="{{ url('js/yourpage.js') }}"></script>
+@endpush
