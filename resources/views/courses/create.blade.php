@@ -15,3 +15,42 @@
 
     TODO: build the form here.
 --}}
+@extends('layouts.layout')
+
+@section('content')
+    <div class="page-header">
+        <a href="{{ route('courses.index') }}" class="back-btn">&#8592;</a>
+        <h1 class="page-title">Add Course</h1>
+    </div>
+
+    <form method="POST" action="{{ route('courses.store') }}" class="form-card">
+        @csrf
+
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title">
+        </div>
+
+        <div class="form-group">
+            <label for="course_code">Course Code</label>
+            <input type="text" id="course_code" name="course_code">
+        </div>
+
+        <div class="form-group">
+            <label for="credit_hours">Credit Hours</label>
+            <input type="number" id="credit_hours" name="credit_hours" min="1" max="12">
+        </div>
+
+        <div class="form-group">
+            <label for="department_id">Department</label>
+            <select id="department_id" name="department_id">
+                <option value="">-- None --</option>
+                @foreach($departmentOptions as $id => $name)
+                    <option value="{{ $id }}">{{ $name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <button type="submit" class="btn">Save</button>
+    </form>
+@endsection

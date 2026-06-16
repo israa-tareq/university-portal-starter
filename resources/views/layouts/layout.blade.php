@@ -15,11 +15,12 @@
             LIMU
         </div>
         <div class="nav-links">
-            <a href="{{ url('/dashboard') }}"><i data-lucide="layout-dashboard"></i> Dashboard</a>
-            <a href="{{ url('/my-courses') }}"><i data-lucide="book-open"></i> My Courses</a>
-            <a href="{{ url('/messages') }}"><i data-lucide="message-square"></i> Messages</a>
-            <a href="{{ url('/grades') }}"><i data-lucide="graduation-cap"></i> Grades</a>
-        </div>
+    <a href="{{ route('departments.index') }}"><i data-lucide="layout-dashboard"></i> Departments</a>
+    <a href="{{ route('students.index') }}"><i data-lucide="users"></i> Students</a>
+    <a href="{{ route('courses.index') }}"><i data-lucide="book-open"></i> Courses</a>
+    <a href="{{ route('professors.index') }}"><i data-lucide="user"></i> Professors</a>
+    <a href="{{ route('enrollments.index') }}"><i data-lucide="clipboard-list"></i> Enrollments</a>
+</div>
         <div class="right-section">
             <div class="notifications">
                 <i data-lucide="bell"></i>
