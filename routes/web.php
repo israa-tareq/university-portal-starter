@@ -40,6 +40,7 @@ use Illuminate\Support\Facades\Route;
 
 // TODO: write your routes below this line.
 
+
 Route::get('/', function () {
     return view('layouts.layout');
 });
@@ -61,3 +62,4 @@ Route::resource('students', StudentController::class)->except('show');
 Route::resource('courses', CourseController::class)->except('show');
 Route::resource('professors', ProfessorController::class)->except('show');
 Route::resource('enrollments', EnrollmentController::class)->except('show');
+
