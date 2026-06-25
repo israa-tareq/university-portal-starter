@@ -1,15 +1,40 @@
-{{--
-    YOUR TASK (W10):  form to edit an existing department.
+@extends('layouts.layout')
+@section('title', 'Edit Department')
+@section('content')
+    <div class="create-department">
+        <div class="return-home">
+            <a href="{{ route('departments.index') }}">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>&lt; Return to Departments</span>
+            </a>
+        </div>
 
-    The controller passes in:
-        $department  — an App\DTOs\DepartmentDTO  (getId(), getName())
+        <x-card title="Edit Department">
+            <form action="{{ route('departments.update', $department->getId()) }}" method="POST" class="create-department-form">
+                @csrf
+                @method('PUT')
 
-    Submit the form with:
-        method="POST" + @csrf + @method('PUT')
-        action="{{ route('departments.update', $department->getId()) }}"
+                <x-form-input
+                    name="name"
+                    label="Department Name"
+                    :value="$department->getName()"
+                    placeholder="e.g. Computer Science"
+                    required
+                />
 
-    Pre-fill the input with the current value: $department->getName()
-    Validated fields:  name (required)
+                <div class="form-divider"></div>
 
-    TODO: build the form here.
---}}
+                <div class="form-actions">
+                    <x-button :href="route('departments.index')" variant="secondary">Cancel</x-button>
+                    <x-button type="submit" variant="primary">Save Changes</x-button>
+                </div>
+            </form>
+        </x-card>
+    </div>
+@endsection
+@push('styles')
+    <link rel="stylesheet" href="{{ url('css/Departments.css') }}">
+@endpush
+@push('scripts')
+    <script src="{{ url('js/Departments.js') }}"></script>
+@endpush

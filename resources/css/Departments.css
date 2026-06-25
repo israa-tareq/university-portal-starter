@@ -1,0 +1,619 @@
+.department-page-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-bottom: 60px;
+    flex: 1;
+    min-height: calc(100vh - 64px - 300px);
+}
+
+/* ── Page Header ── */
+.Department-page-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 20px;
+    width: 500px;
+}
+.Department-page-Logo {
+    background-color: #00393d;
+    border: 2px solid #00393d;
+    border-radius: 25%;
+    padding: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.Department-page-Logo svg {
+    stroke: #00a3a3;
+    width: 30px;
+    height: 30px;
+}
+.Department-page-title-text {
+    font-size: 1.8em;
+    color: #00393d;
+    margin: 0;
+}
+.Department-page-description {
+    font-size: 0.95em;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* ── Search and Create Card ── */
+.search-and-create-card {
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    width: 500px;
+    height: 60px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+.search-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+.search-icon {
+    width: 16px;
+    height: 16px;
+    color: #9ca3af;
+    flex-shrink: 0;
+}
+.search-icon svg {
+    width: 16px;
+    height: 16px;
+    stroke: #9ca3af;
+}
+.search-input {
+    border: none;
+    outline: none;
+    font-size: 0.875em;
+    color: #111827;
+    width: 100%;
+    background: transparent;
+}
+.search-input::placeholder {
+    color: #9ca3af;
+}
+
+.btn-add-department {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #0FA4AF;
+    color: white;
+    font-size: 0.8em;
+    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background-color 0.15s ease;
+}
+.btn-add-department svg {
+    width: 14px;
+    height: 14px;
+    stroke: white;
+}
+.btn-add-department:hover {
+    background-color: #0d8f99;
+}
+
+/* ── Department Display Card ── */
+.Department-display-card {
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    width: 500px;
+    background-color: white;
+    margin-top: 16px;
+    overflow: hidden;
+}
+
+.display-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid #e5e7eb;
+}
+.display-card-title {
+    font-size: 0.95em;
+    font-weight: 600;
+    color: #00393d;
+}
+.display-card-count {
+    background-color: #e0f2f3;
+    color: #00393d;
+    font-size: 0.8em;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 999px;
+}
+
+.department-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    border-bottom: 1px solid #f3f4f6;
+    transition: background-color 0.15s ease;
+}
+.department-row:last-child {
+    border-bottom: none;
+}
+.department-row:hover {
+    background-color: #f9fafb;
+}
+.department-row.confirming-delete {
+    background-color: #fff5f5;
+}
+.department-row.confirming-delete:hover {
+    background-color: #fff5f5;
+}
+
+.department-row-icon {
+    background-color: #e0f2f3;
+    border-radius: 6px;
+    padding: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.department-row-icon svg {
+    stroke: #00a3a3;
+    width: 16px;
+    height: 16px;
+}
+
+.department-row-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 2px;
+}
+
+.department-row-name {
+    font-size: 0.9em;
+    color: #111827;
+}
+
+.department-row-id {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.78em;
+    color: #6b7280;
+    background-color: #f3f4f6;
+    border-radius: 4px;
+    padding: 2px 7px;
+    width: fit-content;
+}
+
+.department-row-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.btn-edit,
+.btn-delete {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    transition: background-color 0.15s ease;
+}
+.btn-edit svg {
+    stroke: #6b7280;
+    width: 15px;
+    height: 15px;
+}
+.btn-delete svg {
+    stroke: #ef4444;
+    width: 15px;
+    height: 15px;
+}
+.btn-edit:hover {
+    background-color: #e0f2f3;
+}
+.btn-delete:hover {
+    background-color: #fee2e2;
+}
+
+.delete-confirm-text {
+    font-size: 0.85em;
+    color: #ef4444;
+    font-weight: 500;
+}
+.btn-confirm-delete {
+    background-color: #ef4444;
+    color: white;
+    border: 1px solid #ef4444;
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-size: 0.75em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+.btn-confirm-delete:hover {
+    background-color: #dc2626;
+    border-color: #dc2626;
+}
+.btn-cancel-delete {
+    background-color: white;
+    color: #374151;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-size: 0.75em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+.btn-cancel-delete:hover {
+    background-color: #f3f4f6;
+}
+
+.no-departments {
+    text-align: center;
+    color: #9ca3af;
+    font-size: 0.9em;
+    padding: 20px;
+    margin: 0;
+}
+
+/* ── Return Home Link ── */
+.return-home {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 500px;
+    margin-bottom: 16px;
+}
+.return-home a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: grey;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.return-home a:hover {
+    text-decoration: underline;
+    color: #00a3a3;
+}
+
+/* ── Create Department Page ── */
+.create-department {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-bottom: 60px;
+    flex: 1;
+    min-height: calc(100vh - 64px - 300px);
+}
+
+.create-department-card {
+    width: 500px;
+    background-color: white;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.create-department-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background-color: #00393d;
+    padding: 20px 24px;
+}
+.create-department-icon {
+    background-color: #0FA4AF;
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.create-department-icon svg {
+    stroke: white;
+    width: 18px;
+    height: 18px;
+}
+.create-department-title {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+}
+.create-department-subtitle {
+    font-size: 0.85em;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 2px 0 0 0;
+}
+
+.create-department-body {
+    padding: 24px;
+}
+
+.create-department-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.form-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #111827;
+}
+.form-label svg {
+    stroke: #00a3a3;
+    width: 16px;
+    height: 16px;
+}
+.required-asterisk {
+    color: #ef4444;
+}
+.form-input {
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 0.9em;
+    color: #111827;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.15s ease;
+}
+.form-input::placeholder {
+    color: #9ca3af;
+}
+.form-input:focus {
+    border-color: #0FA4AF;
+}
+
+.btn-submit-department {
+    margin-top: 4px;
+    background-color: #0FA4AF;
+    color: white;
+    font-size: 0.9em;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+.btn-submit-department:hover {
+    background-color: #0d8f99;
+}
+
+/* ── Edit form: two-column row ── */
+.form-row {
+    display: flex;
+    gap: 16px;
+}
+.form-row .form-group {
+    flex: 1;
+    min-width: 0;
+}
+
+/* ── Optional label hint ── */
+.optional-hint {
+    color: #9ca3af;
+    font-weight: 400;
+    font-size: 0.85em;
+}
+
+/* ── Textarea ── */
+.form-textarea {
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 0.9em;
+    font-family: inherit;
+    color: #111827;
+    outline: none;
+    resize: vertical;
+    min-height: 90px;
+    box-sizing: border-box;
+    transition: border-color 0.15s ease;
+}
+.form-textarea::placeholder {
+    color: #9ca3af;
+}
+.form-textarea:focus {
+    border-color: #0FA4AF;
+}
+
+/* ── Divider above footer ── */
+.form-divider {
+    height: 1px;
+    background-color: #e5e7eb;
+    margin: 4px 0;
+}
+
+/* ── Footer actions ── */
+.form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+}
+.btn-cancel {
+    background: transparent;
+    border: none;
+    color: #6b7280;
+    font-size: 0.9em;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 8px 4px;
+    transition: color 0.15s ease;
+}
+.btn-cancel:hover {
+    color: #111827;
+}
+.btn-save-changes {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #0FA4AF;
+    color: white;
+    font-size: 0.9em;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+}
+.btn-save-changes svg {
+    width: 16px;
+    height: 16px;
+    stroke: white;
+}
+.btn-save-changes:hover {
+    background-color: #0d8f99;
+}
+
+/* ── Wider card to fit the two-column layout ── */
+.create-department-card {
+    width: 100%;
+    max-width: 600px;
+}
+.return-home {
+    width: 100%;
+    max-width: 600px;
+}
+
+/* ── Responsive: stack columns on small screens ── */
+@media (max-width: 640px) {
+    .form-row {
+        flex-direction: column;
+        gap: 18px;
+    }
+}
+
+/* ════════════════════════════════════════════════════
+   REUSABLE BLADE COMPONENTS (x-button, x-card, x-form-input)
+   Used across all five modules — departments, students,
+   courses, professors, enrollments.
+   ════════════════════════════════════════════════════ */
+
+/* ── Button Component (x-button) ── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.9em;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+.btn-primary {
+    background-color: #0FA4AF;
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #0d8f99;
+}
+.btn-secondary {
+    background-color: white;
+    color: #374151;
+    border: 1px solid #d1d5db;
+}
+.btn-secondary:hover {
+    background-color: #f3f4f6;
+}
+.btn-danger {
+    background-color: #ef4444;
+    color: white;
+}
+.btn-danger:hover {
+    background-color: #dc2626;
+}
+
+/* ── Card Component (x-card) ── */
+.card {
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.card-header {
+    background-color: #00393d;
+    color: white;
+    font-size: 1em;
+    font-weight: 700;
+    padding: 16px 24px;
+}
+.card-body {
+    padding: 24px;
+}
+
+/* ── Form Input Component (x-form-input) ── */
+.form-control {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 0.9em;
+    color: #111827;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.15s ease;
+}
+.form-control::placeholder {
+    color: #9ca3af;
+}
+.form-control:focus {
+    border-color: #0FA4AF;
+}
+.form-error {
+    font-size: 0.85em;
+    color: #ef4444;
+    font-weight: 500;
+}

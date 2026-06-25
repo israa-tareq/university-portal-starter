@@ -18,3 +18,34 @@
 
     TODO: build the component here.
 --}}
+
+@props([
+    'name',
+    'label',
+    'type' => 'text',
+    'value' => '',
+    'required' => false,
+])
+
+<div class="form-group">
+    <label for="{{ $name }}" class="form-label">
+        {{ $label }}
+        @if($required)
+            <span class="required-asterisk">*</span>
+        @endif
+    </label>
+
+    <input
+        type="{{ $type }}"
+        id="{{ $name }}"
+        name="{{ $name }}"
+        value="{{ old($name, $value) }}"
+        {{ $required ? 'required' : '' }}
+        {{ $attributes->merge(['class' => 'form-control']) }}
+    >
+
+    @error($name)
+        <span class="form-error">{{ $message }}</span>
+    @enderror
+</div>
+
