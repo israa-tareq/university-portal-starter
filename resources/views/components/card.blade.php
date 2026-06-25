@@ -13,3 +13,16 @@
 
     TODO: build the component here.
 --}}
+
+@props([
+    'title' => null,
+])
+
+<div {{ $attributes->merge(['class' => 'card']) }}>
+    @if($title)
+        <div class="card-header">{{ $title }}</div>
+    @endif
+    <div class="card-body">
+        {{ $slot }}
+    </div>
+</div>

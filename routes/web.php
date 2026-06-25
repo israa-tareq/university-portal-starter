@@ -40,6 +40,7 @@ use Illuminate\Support\Facades\Route;
 
 // TODO: write your routes below this line.
 
+
 Route::get('/', function () {
     return view('layouts.layout');
 });
