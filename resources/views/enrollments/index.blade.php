@@ -39,9 +39,10 @@
                 <div class="module-row-info">
                     <span class="module-row-name">{{ $enrollment->getStudentName() }}</span>
                     <div class="module-row-meta">
-                        {{ $enrollment->getCourseCode() }} — {{ $enrollment->getCourseTitle() }}
+                        <span class="meta-tag">{{ $enrollment->getCourseCode() }}</span>
+                        <span class="meta-tag">{{ $enrollment->getCourseTitle() }}</span>
                         @if($enrollment->getGrade())
-                            · Grade: {{ $enrollment->getGrade() }}
+                            <span class="meta-tag">Grade: {{ $enrollment->getGrade() }}</span>
                         @endif
                     </div>
                 </div>

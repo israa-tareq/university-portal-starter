@@ -1,1 +1,153 @@
-﻿
+/* ── Courses Edit Page ── */
+
+/* ── Form Page Layout ── */
+.module-form-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+    padding-bottom: 60px;
+    flex: 1;
+    min-height: calc(100vh - 64px - 300px);
+}
+
+/* ── Return Link ── */
+.module-return {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 720px;
+    margin-bottom: 16px;
+}
+.module-return a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: grey;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+.module-return a:hover {
+    text-decoration: underline;
+    color: #00a3a3;
+}
+.module-return a svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+}
+
+/* ── Form ── */
+.module-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* ── Form Footer Actions ── */
+.form-divider {
+    height: 1px;
+    background-color: #e5e7eb;
+    margin: 4px 0;
+}
+.form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+}
+
+/* ── Card Component (x-card) ── */
+.card {
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.card-header {
+    background-color: #00393d;
+    color: white;
+    font-size: 1em;
+    font-weight: 700;
+    padding: 16px 24px;
+}
+.card-body {
+    padding: 24px;
+}
+
+/* ── Form Input / Select Components (x-form-input, x-form-select) ── */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.form-label {
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #111827;
+}
+.required-asterisk {
+    color: #ef4444;
+}
+.form-control {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 0.9em;
+    color: #111827;
+    outline: none;
+    box-sizing: border-box;
+    font-family: inherit;
+    background-color: white;
+    transition: border-color 0.15s ease;
+}
+.form-control::placeholder {
+    color: #9ca3af;
+}
+.form-control:focus {
+    border-color: #0FA4AF;
+}
+.form-error {
+    font-size: 0.85em;
+    color: #ef4444;
+    font-weight: 500;
+}
+
+/* ── Button Component (x-button) ── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.9em;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    font-family: inherit;
+    transition: background-color 0.15s ease;
+}
+.btn-primary {
+    background-color: #0FA4AF;
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #0d8f99;
+    color: white;
+}
+.btn-secondary {
+    background-color: white;
+    color: #374151;
+    border: 1px solid #d1d5db;
+}
+.btn-secondary:hover {
+    background-color: #f3f4f6;
+}

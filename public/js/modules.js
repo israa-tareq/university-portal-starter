@@ -24,6 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
             const row = deleteBtn.closest('.module-row');
             const originalHTML = actionsDiv.innerHTML;
 
+            // Move form out of actionsDiv so it survives the innerHTML replacement
+            row.appendChild(form);
+            form.style.display = 'none';
+
             row.classList.add('confirming-delete');
 
             actionsDiv.innerHTML = `
@@ -37,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             actionsDiv.querySelector('.btn-cancel-delete').addEventListener('click', function () {
+                form.remove();
                 actionsDiv.innerHTML = originalHTML;
                 row.classList.remove('confirming-delete');
                 lucide.createIcons();

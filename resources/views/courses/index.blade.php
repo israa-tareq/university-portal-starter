@@ -39,9 +39,10 @@
                 <div class="module-row-info">
                     <span class="module-row-name">{{ $course->getTitle() }}</span>
                     <div class="module-row-meta">
-                        {{ $course->getCourseCode() }} · {{ $course->getCreditHours() }} cr
+                        <span class="meta-tag">{{ $course->getCourseCode() }}</span>
+                        <span class="meta-tag">{{ $course->getCreditHours() }} cr</span>
                         @if($course->getDepartmentName())
-                            · {{ $course->getDepartmentName() }}
+                            <span class="meta-tag">{{ $course->getDepartmentName() }}</span>
                         @endif
                     </div>
                 </div>

@@ -39,9 +39,9 @@
                 <div class="module-row-info">
                     <span class="module-row-name">{{ $professor->getName() }}</span>
                     <div class="module-row-meta">
-                        {{ $professor->getEmail() }}
+                        <span class="meta-tag">{{ $professor->getEmail() }}</span>
                         @if($professor->getDepartmentName())
-                            · {{ $professor->getDepartmentName() }}
+                            <span class="meta-tag">{{ $professor->getDepartmentName() }}</span>
                         @endif
                     </div>
                 </div>

@@ -53,12 +53,31 @@
             </div>
 
             {{-- Loop through each department and render a row --}}
+            @php
+                $departmentIcons = [
+                    'computer science'        => 'cpu',
+                    'mathematics'             => 'calculator',
+                    'electrical engineering'  => 'zap',
+                    'mechanical engineering'  => 'wrench',
+                    'business administration' => 'briefcase',
+                    'economics'               => 'trending-up',
+                    'physics'                 => 'atom',
+                    'chemistry'               => 'flask-conical',
+                    'biology'                 => 'microscope',
+                    'psychology'              => 'brain',
+                    'english literature'      => 'book-open',
+                    'civil engineering'       => 'hard-hat',
+                ];
+            @endphp
             @foreach($departments as $department)
+                @php
+                    $icon = $departmentIcons[strtolower($department->getName())] ?? 'building-2';
+                @endphp
                 <div class="department-row">
 
                     {{-- Department icon --}}
                     <div class="department-row-icon">
-                        <i data-lucide="building-2"></i>
+                        <i data-lucide="{{ $icon }}"></i>
                     </div>
 
                     {{-- Department name and ID stacked vertically --}}

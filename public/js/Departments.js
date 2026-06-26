@@ -19,6 +19,10 @@ document.addEventListener('DOMContentLoaded', function () {
             const row = deleteBtn.closest('.department-row');
             const originalHTML = actionsDiv.innerHTML;
 
+            // Move form out of actionsDiv so it survives the innerHTML replacement
+            row.appendChild(form);
+            form.style.display = 'none';
+
             // Add red tint to the row
             row.classList.add('confirming-delete');
 
@@ -33,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             actionsDiv.querySelector('.btn-cancel-delete').addEventListener('click', function () {
+                form.remove();
                 actionsDiv.innerHTML = originalHTML;
                 // Remove red tint on cancel
                 row.classList.remove('confirming-delete');

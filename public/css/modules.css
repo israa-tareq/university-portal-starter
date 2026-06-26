@@ -194,15 +194,20 @@
     color: #111827;
 }
 .module-row-meta {
-    display: inline-flex;
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 4px;
+}
+.meta-tag {
+    display: inline-flex;
+    align-items: center;
     font-size: 0.78em;
     color: #6b7280;
     background-color: #f3f4f6;
     border-radius: 4px;
     padding: 2px 7px;
-    width: fit-content;
+    white-space: nowrap;
 }
 .module-row-actions {
     display: flex;

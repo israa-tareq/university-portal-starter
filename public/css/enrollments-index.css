@@ -1,1 +1,270 @@
-﻿
+/* ── Enrollments Index Page ── */
+
+/* ── Page Section ── */
+.module-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    padding-top: 30px;
+    padding-bottom: 60px;
+    flex: 1;
+    min-height: calc(100vh - 64px - 300px);
+}
+
+/* ── Page Header ── */
+.module-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 20px;
+    width: 100%;
+    max-width: 720px;
+}
+.module-logo {
+    background-color: #00393d;
+    border: 2px solid #00393d;
+    border-radius: 25%;
+    padding: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.module-logo svg {
+    stroke: #00a3a3;
+    width: 30px;
+    height: 30px;
+}
+.module-title {
+    font-size: 1.8em;
+    color: #00393d;
+    margin: 0;
+}
+.module-desc {
+    font-size: 0.95em;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* ── Search and Create Card ── */
+.search-and-create-card {
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 720px;
+    height: 60px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    gap: 10px;
+    box-sizing: border-box;
+}
+.search-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+.search-icon {
+    width: 16px;
+    height: 16px;
+    color: #9ca3af;
+    flex-shrink: 0;
+}
+.search-icon svg {
+    width: 16px;
+    height: 16px;
+    stroke: #9ca3af;
+}
+.search-input {
+    border: none;
+    outline: none;
+    font-size: 0.875em;
+    color: #111827;
+    width: 100%;
+    background: transparent;
+}
+.search-input::placeholder {
+    color: #9ca3af;
+}
+.btn-add {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #0FA4AF;
+    color: white;
+    font-size: 0.8em;
+    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+.btn-add svg {
+    width: 14px;
+    height: 14px;
+    stroke: white;
+}
+.btn-add:hover {
+    background-color: #0d8f99;
+    color: white;
+}
+
+/* ── Display Card ── */
+.module-display-card {
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 720px;
+    background-color: white;
+    margin-top: 16px;
+    overflow: hidden;
+}
+.display-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid #e5e7eb;
+}
+.display-card-title {
+    font-size: 0.95em;
+    font-weight: 600;
+    color: #00393d;
+}
+.display-card-count {
+    background-color: #e0f2f3;
+    color: #00393d;
+    font-size: 0.8em;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 999px;
+}
+
+/* ── Rows ── */
+.module-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    border-bottom: 1px solid #f3f4f6;
+    transition: background-color 0.15s ease;
+}
+.module-row:last-child {
+    border-bottom: none;
+}
+.module-row:hover {
+    background-color: #f9fafb;
+}
+.module-row.confirming-delete {
+    background-color: #fff5f5;
+}
+.module-row.confirming-delete:hover {
+    background-color: #fff5f5;
+}
+.module-row-icon {
+    background-color: #e0f2f3;
+    border-radius: 6px;
+    padding: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.module-row-icon svg {
+    stroke: #00a3a3;
+    width: 16px;
+    height: 16px;
+}
+.module-row-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 2px;
+}
+.module-row-name {
+    font-size: 0.9em;
+    color: #111827;
+}
+.module-row-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.btn-edit,
+.btn-delete {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    transition: background-color 0.15s ease;
+}
+.btn-edit svg {
+    stroke: #6b7280;
+    width: 15px;
+    height: 15px;
+}
+.btn-delete svg {
+    stroke: #ef4444;
+    width: 15px;
+    height: 15px;
+}
+.btn-edit:hover {
+    background-color: #e0f2f3;
+}
+.btn-delete:hover {
+    background-color: #fee2e2;
+}
+.module-empty {
+    text-align: center;
+    color: #9ca3af;
+    font-size: 0.9em;
+    padding: 20px;
+    margin: 0;
+}
+
+/* ── Button Component (x-button) ── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.9em;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    font-family: inherit;
+    transition: background-color 0.15s ease;
+}
+.btn-primary {
+    background-color: #0FA4AF;
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #0d8f99;
+    color: white;
+}
+.btn-secondary {
+    background-color: white;
+    color: #374151;
+    border: 1px solid #d1d5db;
+}
+.btn-secondary:hover {
+    background-color: #f3f4f6;
+}
