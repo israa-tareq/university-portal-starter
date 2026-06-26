@@ -15,6 +15,7 @@
             LIMU
         </div>
         <div class="nav-links">
+    <a href="{{ route('dashboard') }}"><i data-lucide="gauge"></i> Dashboard</a>
     <a href="{{ route('departments.index') }}"><i data-lucide="layout-dashboard"></i> Departments</a>
     <a href="{{ route('students.index') }}"><i data-lucide="users"></i> Students</a>
     <a href="{{ route('courses.index') }}"><i data-lucide="book-open"></i> Courses</a>

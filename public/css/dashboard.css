@@ -1,0 +1,452 @@
+/* ── Dashboard page ── */
+
+.dashboard-section {
+    /* inherits .content padding from layout */
+}
+
+/* Header */
+.dashboard-header {
+    margin-bottom: 28px;
+}
+
+.dashboard-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 4px 0;
+}
+
+.dashboard-subtitle {
+    color: #6b7280;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* ── Stat cards ── */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.04);
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.stat-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.stat-icon--teal   { background: #e6fafa; }
+.stat-icon--teal svg { color: #0FA4AF; }
+.stat-icon--blue   { background: #eff6ff; }
+.stat-icon--blue svg { color: #3b82f6; }
+.stat-icon--purple { background: #f5f3ff; }
+.stat-icon--purple svg { color: #8b5cf6; }
+.stat-icon--orange { background: #fff7ed; }
+.stat-icon--orange svg { color: #f97316; }
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.stat-label {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #9ca3af;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+.stat-value {
+    font-size: 26px;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.15;
+}
+
+/* ── Analytics section ── */
+.section-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 16px 0;
+}
+
+.section-heading svg {
+    width: 17px;
+    height: 17px;
+    color: #6b7280;
+}
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.chart-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 18px 18px 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.04);
+}
+
+.chart-card h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 14px 0;
+}
+
+.chart-canvas-wrapper {
+    position: relative;
+    height: 170px;
+}
+
+/* ── Bottom row ── */
+.dashboard-bottom-row {
+    display: grid;
+    grid-template-columns: 1fr 290px;
+    gap: 16px;
+    margin-bottom: 28px;
+    align-items: start;
+}
+
+/* Recent enrollments card */
+.recent-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,.04);
+}
+
+.recent-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.recent-card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.recent-card-title svg {
+    width: 15px;
+    height: 15px;
+    color: #6b7280;
+}
+
+.view-all-link {
+    color: #0FA4AF;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.view-all-link:hover {
+    text-decoration: underline;
+}
+
+.enrollment-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.enrollment-table thead th {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    padding: 10px 20px;
+    text-align: left;
+    background: #fafafa;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.enrollment-table tbody tr {
+    border-bottom: 1px solid #f9fafb;
+    transition: background .12s;
+}
+
+.enrollment-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.enrollment-table tbody tr:hover {
+    background: #fafafa;
+}
+
+.enrollment-table tbody td {
+    padding: 11px 20px;
+    vertical-align: middle;
+}
+
+.student-cell {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.student-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.student-info-name {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.student-info-number {
+    font-size: 11.5px;
+    color: #9ca3af;
+}
+
+.course-code-badge {
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 3px 9px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #374151;
+    display: inline-block;
+    font-family: monospace;
+}
+
+.dept-text {
+    font-size: 13px;
+    color: #374151;
+}
+
+.grade-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12.5px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.grade-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.grade-badge--green  { background: #f0fdf4; color: #16a34a; }
+.grade-badge--green::before  { background: #16a34a; }
+.grade-badge--yellow { background: #fefce8; color: #ca8a04; }
+.grade-badge--yellow::before { background: #ca8a04; }
+.grade-badge--red    { background: #fef2f2; color: #dc2626; }
+.grade-badge--red::before    { background: #dc2626; }
+
+/* Course distributions */
+.distributions-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.04);
+}
+
+.distributions-card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 18px 0;
+}
+
+.distributions-card-title svg {
+    width: 15px;
+    height: 15px;
+    color: #6b7280;
+}
+
+.distribution-item {
+    margin-bottom: 14px;
+}
+
+.distribution-item:last-child {
+    margin-bottom: 0;
+}
+
+.distribution-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 5px;
+}
+
+.distribution-name {
+    font-size: 12.5px;
+    color: #374151;
+    font-weight: 500;
+}
+
+.distribution-pct {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #374151;
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+
+.distribution-bar-track {
+    height: 7px;
+    background: #f3f4f6;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.distribution-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: #0FA4AF;
+}
+
+.distribution-bar-fill--light {
+    background: #d1d5db;
+}
+
+/* ── Department cards ── */
+.dept-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.dept-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 22px 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.04);
+}
+
+.dept-card-icon {
+    width: 42px;
+    height: 42px;
+    background: #e6fafa;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+}
+
+.dept-card-icon svg {
+    width: 20px;
+    height: 20px;
+    color: #0FA4AF;
+}
+
+.dept-card-name {
+    font-size: 17px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 6px 0;
+}
+
+.dept-card-meta {
+    font-size: 12.5px;
+    color: #6b7280;
+    margin: 0 0 18px 0;
+}
+
+.dept-card-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.dept-btn {
+    padding: 7px 14px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    transition: background .15s;
+}
+
+.dept-btn--teal { background: #e6fafa; color: #0FA4AF; }
+.dept-btn--teal:hover { background: #ccf5f7; color: #0FA4AF; }
+.dept-btn--gray { background: #f3f4f6; color: #374151; }
+.dept-btn--gray:hover { background: #e5e7eb; }
+
+/* ── Responsive ── */
+@media (max-width: 1200px) {
+    .charts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .charts-grid,
+    .stats-grid,
+    .dept-cards-grid {
+        grid-template-columns: 1fr;
+    }
+    .dashboard-bottom-row {
+        grid-template-columns: 1fr;
+    }
+}

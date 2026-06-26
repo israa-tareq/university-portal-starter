@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\ProfessorController;
@@ -63,6 +64,8 @@ Route::get('js/layout.js', function () {
     return response(file_get_contents($path), 200)
         ->header('Content-Type', 'application/javascript');
 });
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::resource('departments', DepartmentController::class)->except('show');
 Route::resource('students', StudentController::class)->except('show');
