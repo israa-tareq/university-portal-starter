@@ -359,9 +359,20 @@
 
     <form action="{{ route('register') }}" method="POST">
       @csrf
-      <p>Username</p>
+      @if($errors->any())
+        <div style="background:#fee2e2;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:13px;color:#dc2626;">
+          @foreach($errors->all() as $error)
+            <div>{{ $error }}</div>
+          @endforeach
+        </div>
+      @endif
+      <p>Full Name</p>
       <div class="input-wrapper">
-        <input type="text" name="username" placeholder="Username" value="{{ old('username') }}" required>
+        <input type="text" name="name" placeholder="Full Name" value="{{ old('name') }}" required>
+      </div>
+      <p>Email</p>
+      <div class="input-wrapper">
+        <input type="email" name="email" placeholder="Email address" value="{{ old('email') }}" required>
       </div>
       <p>Password</p>
       <div class="input-wrapper">
@@ -369,6 +380,10 @@
         <button type="button" class="toggle-password" onclick="togglePassword()" id="eyeBtn">
           <i class="bi bi-eye-slash" id="eyeIcon"></i>
         </button>
+      </div>
+      <p>Confirm Password</p>
+      <div class="input-wrapper">
+        <input type="password" name="password_confirmation" placeholder="Confirm Password" required>
       </div>
       <button type="submit" class="signup-btn">Sign Up</button>
     </form>
