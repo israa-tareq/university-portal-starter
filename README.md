@@ -1,109 +1,101 @@
-# University Portal — Student Starter
+# LIMU University Portal
 
-Welcome! This is a partially-built Laravel application. The **back end is done for you** — your job is to build the **routes and the views** so the portal actually works in the browser.
-
-When you are finished you will have a working university management system with five modules: **Departments, Students, Courses, Professors,** and **Enrollments**.
-
-> 📚 **New to this pattern?** Read [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) to see how the pieces fit together, follow [`docs/ADDING-A-CRUD-MODULE.md`](docs/ADDING-A-CRUD-MODULE.md) for a full worked example, and keep [`docs/CHEATSHEET.md`](docs/CHEATSHEET.md) open while you build.
+A web-based university management system built with **Laravel** (PHP) for managing students, courses, professors, departments, and enrollments — with full authentication and a live analytics dashboard.
 
 ---
 
-## What is already provided (do NOT change these)
+## Project Overview
 
-| Layer | Files | What it does |
-| --- | --- | --- |
-| **Controllers** | `app/Http/Controllers/*Controller.php` | Receive the request, call a service, return a view |
-| **Services** | `app/Services/*Service.php` | All the data access / business logic |
-| **DTOs** | `app/DTOs/*DTO.php` | Plain objects that carry one record's data |
-| **Migrations** | `database/migrations/2025_01_01_*` | Create the database tables |
-| **Seeder** | `database/seeders/DatabaseSeeder.php` | Fills the database with sample data |
-| **Stylesheet** | `public/css/app.css` | Ready-made CSS classes you may use for styling |
+The LIMU University Portal is an internal management tool for university administrators. It provides a clean, role-protected interface for all core academic data, with real-time statistics and charts on the dashboard.
 
-## What YOU build
-
-| Layer | Files | Outcome |
-| --- | --- | --- |
-| **Routes** | `routes/web.php` | Wire the 5 controllers to URLs |
-| **Layout** | `resources/views/layouts/app.blade.php` | The shared page frame (W13) |
-| **Components** | `resources/views/components/{button,form-input,card}.blade.php` | Reusable `<x-...>` tags (W14) |
-| **Module views** | `resources/views/{departments,students,courses,professors,enrollments}/{index,create,edit}.blade.php` | The 15 CRUD screens (W10) |
-
-Every one of those files already exists with a **comment inside telling you exactly what to build and what data it receives** — open them and follow the `TODO`.
+**Tech stack:** Laravel 11 · PHP 8.4 · SQLite · Blade Templates · Chart.js · Bootstrap Icons · Lucide Icons
 
 ---
 
-## Getting started
+## Features
+
+- **Authentication** — Secure login and registration with session-based auth and protected routes
+- **Dashboard** — Live stats (students, courses, professors, enrollments) with bar, donut, radar, and line charts
+- **Departments** — Full CRUD for university departments
+- **Students** — Full CRUD for student records
+- **Courses** — Full CRUD for course catalog
+- **Professors** — Full CRUD for faculty members
+- **Enrollments** — Full CRUD for student–course enrollments with grade tracking
+- **Collapsible sidebar** — Responsive side navigation that collapses to icons on desktop and slides in on mobile
+
+---
+
+## Getting Started
+
+### Requirements
+- PHP 8.2+
+- Composer
+
+### Setup
 
 ```bash
-cd university-portal-starter
-
-# 1. install PHP dependencies
+# 1. Install PHP dependencies
 composer install
 
-# 2. create your environment file and generate the app key
+# 2. Copy environment file and generate app key
 cp .env.example .env
 php artisan key:generate
 
-# 3. create the (empty) SQLite database file
-#    On Windows, just create an empty file at database/database.sqlite
-touch database/database.sqlite
+# 3. Make sure your .env has:
+#    SESSION_DRIVER=file
 
-# 4. create the tables and load the sample data
+# 4. Run migrations and seed sample data
 php artisan migrate:fresh --seed
+php artisan portal:seed-auth
 
-# 5. run the app
+# 5. Start the development server
 php artisan serve
 ```
 
-Then open **http://127.0.0.1:8000**. (Pages will be blank until you build the views — that's expected!)
+Then open `http://localhost:8000` and log in with:
+
+| Role  | Email           | Password |
+|-------|-----------------|----------|
+| Admin | admin@uni.edu   | password |
+| User  | student@uni.edu | password |
 
 ---
 
-## Your task list
+## Team & Contributions
 
-1. **Routes** (`routes/web.php`) — register a resource route for each controller. The resource names must be `departments`, `students`, `courses`, `professors`, `enrollments`.
-2. **Layout** — build `layouts/app.blade.php` with a nav bar and `@yield('content')`.
-3. **Components** — build `<x-button>`, `<x-form-input>`, `<x-card>`.
-4. **Departments** → **Students** → **Courses** → **Professors** → **Enrollments** — build the `index`, `create`, and `edit` view for each. Do them in that order; the pattern repeats.
-
-Tip: get **Departments** fully working first (routes + layout + components + its 3 views). Once one module clicks, the other four are the same shape.
-
----
-
-## Data contract (quick reference)
-
-Your views receive **objects** (DTOs) and **arrays**. Read each value with a getter method, e.g. `{{ $student->getName() }}`.
-
-**DTO getters**
-
-| DTO | Methods |
-| --- | --- |
-| `DepartmentDTO` | `getId() getName()` |
-| `StudentDTO` | `getId() getName() getEmail() getStudentNumber() getDepartmentId() getDepartmentName()` |
-| `CourseDTO` | `getId() getTitle() getCourseCode() getCreditHours() getDepartmentId() getDepartmentName()` |
-| `ProfessorDTO` | `getId() getName() getEmail() getDepartmentId() getDepartmentName()` |
-| `EnrollmentDTO` | `getId() getStudentId() getCourseId() getGrade() getStudentName() getCourseTitle() getCourseCode()` |
-
-**Form field names** (what each `store`/`update` expects — use them as your input `name=""`)
-
-| Module | Fields |
-| --- | --- |
-| Departments | `name` |
-| Students | `name`, `email`, `student_number`, `department_id` |
-| Courses | `title`, `course_code`, `credit_hours`, `department_id` |
-| Professors | `name`, `email`, `department_id` |
-| Enrollments | `student_id`, `course_id`, `grade` |
-
-**Remember for every form:** add `@csrf`. For edit/update forms also add `@method('PUT')`, and for delete buttons use a small `POST` form with `@method('DELETE')`.
+| Name            | Contributions |
+|-----------------|---------------|
+| **Abdel Hady**  | Overall layout design and system architecture · Departments module (views, controller, service) |
+| **Israa**       | Authentication integration (connecting login/signup to the portal) · Courses module · Dashboard page |
+| **Ghanima**     | Reusable Blade components (button, card, form-input, form-select) · Students module |
+| **Yahya**       | Login and signup page UI/UX design · Professors module · Enrollments module |
 
 ---
 
-## What you are being assessed on (ILOs)
+## Project Structure
 
-- **W10** — processing form data and looping over arrays with `@foreach` in your views.
-- **W11** — (provided) OOP Controllers, Services and DTOs — read them to see encapsulation in action.
-- **W12** — Laravel + MVC: your routes connect URLs to the provided controllers.
-- **W13** — your `layouts/app.blade.php` master layout, extended by every view.
-- **W14** — your reusable `<x-button>`, `<x-form-input>`, `<x-card>` components.
+```
+app/
+├── Http/Controllers/    # One controller per module + AuthController + DashboardController
+├── Models/              # User model
+├── Services/            # Business logic layer (one service per module)
+└── DTOs/                # Data Transfer Objects for each module
 
-Good luck!
+resources/views/
+├── auth/                # Login & register pages
+├── layouts/             # Main layout with collapsible sidebar
+├── components/          # Reusable Blade components
+├── dashboard/           # Dashboard with charts
+├── departments/         # Department CRUD views
+├── students/            # Student CRUD views
+├── courses/             # Course CRUD views
+├── professors/          # Professor CRUD views
+└── enrollments/         # Enrollment CRUD views
+
+routes/
+└── web.php              # All application routes
+```
+
+---
+
+&copy; 2025 LIMU · Benghazi, Libya
