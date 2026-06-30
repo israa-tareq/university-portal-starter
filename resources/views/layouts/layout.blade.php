@@ -38,9 +38,17 @@
     </nav>
 
     <div class="sidebar-user">
-        <div class="sidebar-avatar">{{ $initials }}</div>
+        <a href="{{ route('profile.edit') }}" class="sidebar-avatar" title="Edit profile">
+            @if($user->avatarUrl())
+                <img src="{{ $user->avatarUrl() }}" alt="{{ $user->name }}">
+            @else
+                {{ $initials }}
+            @endif
+        </a>
         <div class="sidebar-user-info">
-            <p class="sidebar-user-name">{{ $user->name }}</p>
+            <a href="{{ route('profile.edit') }}">
+                <p class="sidebar-user-name">{{ $user->name }}</p>
+            </a>
             <p class="sidebar-user-email">{{ $user->email }}</p>
         </div>
         <form method="POST" action="{{ route('logout') }}" class="sidebar-logout-form">
@@ -68,11 +76,29 @@
         </div>
         <div class="topbar-right">
             <div class="topbar-bell"><i data-lucide="bell"></i></div>
-            <div class="topbar-avatar">{{ $initials }}</div>
+            <a href="{{ route('profile.edit') }}" class="topbar-avatar" title="Edit profile">
+                @if($user->avatarUrl())
+                    <img src="{{ $user->avatarUrl() }}" alt="{{ $user->name }}">
+                @else
+                    {{ $initials }}
+                @endif
+            </a>
         </div>
     </header>
 
     <div class="page-content">
+        @if(session('success'))
+            <div class="flash-banner flash-success">
+                <i data-lucide="check-circle"></i>
+                <span>{{ session('success') }}</span>
+            </div>
+        @endif
+        @if(session('error'))
+            <div class="flash-banner flash-error">
+                <i data-lucide="alert-circle"></i>
+                <span>{{ session('error') }}</span>
+            </div>
+        @endif
         @yield('content')
     </div>
 

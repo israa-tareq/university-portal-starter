@@ -34,7 +34,7 @@ class ProfessorController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255'],
+            'email' => ['required', 'email', 'max:255', 'unique:professors,email'],
             'department_id' => ['nullable', 'integer', 'exists:departments,id'],
         ]);
 
@@ -60,7 +60,7 @@ class ProfessorController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255'],
+            'email' => ['required', 'email', 'max:255', 'unique:professors,email,'.$id],
             'department_id' => ['nullable', 'integer', 'exists:departments,id'],
         ]);
 

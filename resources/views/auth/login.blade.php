@@ -246,8 +246,12 @@
     <h1>Login</h1>
     <p class="welcome-back-text">Welcome back! Please login to your account.</p>
 
-    @if(session('error'))
-      <div class="alert-error">{{ session('error') }}</div>
+    @if($errors->any())
+      <div class="alert-error">
+        @foreach($errors->all() as $error)
+          <div>{{ $error }}</div>
+        @endforeach
+      </div>
     @endif
 
     <form action="{{ route('login') }}" method="POST">

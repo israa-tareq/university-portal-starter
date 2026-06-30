@@ -117,11 +117,16 @@ body {
     display: flex; align-items: center; justify-content: center;
     font-size: 12px; font-weight: 700; color: white;
     flex-shrink: 0;
+    overflow: hidden;
 }
-.sidebar-user-info {
-    flex: 1; overflow: hidden;
-    transition: opacity var(--transition);
+.sidebar-avatar img,
+.topbar-avatar img {
+    width: 100%; height: 100%;
+    object-fit: cover;
 }
+.sidebar-user-info { flex: 1; overflow: hidden; transition: opacity var(--transition); }
+.sidebar-user-info a { text-decoration: none; }
+.sidebar-user-name:hover { color: var(--sb-accent); }
 .sidebar-user-name {
     margin: 0; color: white;
     font-size: 13px; font-weight: 600;
@@ -192,7 +197,9 @@ body {
     width: 32px; height: 32px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     font-size: 12px; font-weight: 700; color: white; cursor: pointer;
+    overflow: hidden;
 }
+.topbar-avatar { text-decoration: none; }
 
 /* Page content */
 .page-content {
@@ -322,3 +329,14 @@ body {
 .form-error { font-size: 0.85em; color: #ef4444; font-weight: 500; }
 
 .content-placeholder { text-align: center; font-size: 18px; color: #666; margin-top: 50px; }
+
+/* Flash messages */
+.flash-banner {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px; border-radius: 8px;
+    font-size: 0.9em; font-weight: 500;
+    margin-bottom: 20px;
+}
+.flash-banner svg { width: 18px; height: 18px; flex-shrink: 0; }
+.flash-success { background-color: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+.flash-error   { background-color: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }

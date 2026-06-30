@@ -34,7 +34,7 @@ class CourseController extends Controller
     {
         $data = $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'course_code' => ['required', 'string', 'max:20'],
+            'course_code' => ['required', 'string', 'max:20', 'unique:courses,course_code'],
             'credit_hours' => ['required', 'integer', 'min:1', 'max:12'],
             'department_id' => ['nullable', 'integer', 'exists:departments,id'],
         ]);
@@ -61,7 +61,7 @@ class CourseController extends Controller
     {
         $data = $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'course_code' => ['required', 'string', 'max:20'],
+            'course_code' => ['required', 'string', 'max:20', 'unique:courses,course_code,'.$id],
             'credit_hours' => ['required', 'integer', 'min:1', 'max:12'],
             'department_id' => ['nullable', 'integer', 'exists:departments,id'],
         ]);

@@ -36,6 +36,10 @@ class AuthController extends Controller
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
+        ], [
+            'email.required' => 'Please enter your email address.',
+            'email.email' => 'Please enter a valid email address.',
+            'password.required' => 'Please enter your password.',
         ]);
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
@@ -46,7 +50,7 @@ class AuthController extends Controller
         }
 
         return back()
-            ->withErrors(['email' => 'Those credentials do not match our records.'])
+            ->withErrors(['email' => 'The email or password you entered is incorrect.'])
             ->onlyInput('email');
     }
 
@@ -67,12 +71,25 @@ class AuthController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'confirmed', 'min:6'],
+            'avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif,webp', 'max:2048'],
+        ], [
+            'name.required' => 'Please enter your full name.',
+            'email.unique' => 'An account with this email already exists.',
+            'password.confirmed' => 'Password confirmation does not match.',
+            'password.min' => 'Password must be at least 6 characters.',
+            'avatar.image' => 'The profile picture must be an image file.',
+            'avatar.max' => 'The profile picture may not be larger than 2MB.',
         ]);
+
+        $avatarPath = $request->hasFile('avatar')
+            ? $request->file('avatar')->store('avatars', 'public')
+            : null;
 
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => $data['password'], // hashed automatically by the model's cast
+            'avatar' => $avatarPath,
         ]);
 
         Auth::login($user);

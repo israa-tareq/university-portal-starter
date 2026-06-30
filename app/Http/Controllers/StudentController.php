@@ -38,8 +38,8 @@ class StudentController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255'],
-            'student_number' => ['nullable', 'string', 'max:50'],
+            'email' => ['required', 'email', 'max:255', 'unique:students,email'],
+            'student_number' => ['required', 'string', 'max:50'],
             'department_id' => ['nullable', 'integer', 'exists:departments,id'],
         ]);
 
@@ -65,8 +65,8 @@ class StudentController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255'],
-            'student_number' => ['nullable', 'string', 'max:50'],
+            'email' => ['required', 'email', 'max:255', 'unique:students,email,'.$id],
+            'student_number' => ['required', 'string', 'max:50'],
             'department_id' => ['nullable', 'integer', 'exists:departments,id'],
         ]);
 

@@ -329,35 +329,7 @@
     <h1>Sign Up</h1>
     <p class="join-us-text">Join us today! It takes only a few steps</p>
 
-    <p class="profile-section-label">Choose a profile picture</p>
-    <div class="selected-preview" id="selectedPreview">
-      <i class="bi bi-person" style="font-size: 24px; color: #555;"></i>
-    </div>
-    <div class="profile-pic">
-      <div class="circle-option" style="background-color: #2A3A5C;" data-label="WB" onclick="selectAvatar(this)">
-        WB<span class="tick">✓</span>
-      </div>
-      <div class="circle-option" style="background-color: #3D2E52;" data-label="MM" onclick="selectAvatar(this)">
-        MM<span class="tick">✓</span>
-      </div>
-      <div class="circle-option" style="background-color: #1E3A3A;" data-label="KK" onclick="selectAvatar(this)">
-        KK<span class="tick">✓</span>
-      </div>
-      <div class="circle-option" style="background-color: #444441;" data-label="SL" onclick="selectAvatar(this)">
-        SL<span class="tick">✓</span>
-      </div>
-      <div class="circle-option" style="background-color: #7A3B3B;" data-label="AR" onclick="selectAvatar(this)">
-        AR<span class="tick">✓</span>
-      </div>
-    </div>
-    <button class="upload-btn" type="button" onclick="document.getElementById('photoUpload').click()">
-      <i class="bi bi-upload"></i> Upload photo
-    </button>
-    <input type="file" id="photoUpload" accept="image/*" style="display: none;" onchange="previewPhoto(this)">
-
-    <hr class="divider">
-
-    <form action="{{ route('register') }}" method="POST">
+    <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
       @csrf
       @if($errors->any())
         <div style="background:#fee2e2;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:13px;color:#dc2626;">
@@ -366,6 +338,18 @@
           @endforeach
         </div>
       @endif
+
+      <p class="profile-section-label">Profile picture (optional)</p>
+      <div class="selected-preview" id="selectedPreview">
+        <i class="bi bi-person" style="font-size: 24px; color: #555;"></i>
+      </div>
+      <button class="upload-btn" type="button" onclick="document.getElementById('photoUpload').click()">
+        <i class="bi bi-upload"></i> Upload photo
+      </button>
+      <input type="file" id="photoUpload" name="avatar" accept="image/*" style="display: none;" onchange="previewPhoto(this)">
+
+      <hr class="divider">
+
       <p>Full Name</p>
       <div class="input-wrapper">
         <input type="text" name="name" placeholder="Full Name" value="{{ old('name') }}" required>
@@ -407,15 +391,6 @@
       }
     }
 
-    function selectAvatar(el) {
-      document.querySelectorAll('.circle-option').forEach(c => c.classList.remove('selected'));
-      el.classList.add('selected');
-      const preview = document.getElementById('selectedPreview');
-      preview.style.backgroundColor = el.style.backgroundColor;
-      preview.style.borderColor = 'var(--teal)';
-      preview.innerHTML = '<span style="color:#fff;font-weight:700;font-size:13px">' + el.dataset.label + '</span>';
-    }
-
     function previewPhoto(input) {
       if (!input.files || !input.files[0]) return;
       const reader = new FileReader();
@@ -423,7 +398,6 @@
         const preview = document.getElementById('selectedPreview');
         preview.style.backgroundColor = '';
         preview.innerHTML = '<img src="' + e.target.result + '" style="width:100%;height:100%;object-fit:cover;">';
-        document.querySelectorAll('.circle-option').forEach(c => c.classList.remove('selected'));
       };
       reader.readAsDataURL(input.files[0]);
     }
