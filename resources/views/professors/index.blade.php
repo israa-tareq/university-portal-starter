@@ -52,7 +52,8 @@
                     <form action="{{ route('professors.destroy', $professor->getId()) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn-delete">
+                        <button type="button" class="btn-delete"
+                            onclick="openDeleteConfirm(this.closest('form'), '{{ addslashes($professor->getName()) }}', 'Professor', 'Deleting this professor will remove their association with all courses and departments.')">
                             <i data-lucide="trash-2"></i>
                         </button>
                     </form>

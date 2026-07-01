@@ -18,7 +18,7 @@
             <x-form-input name="title" label="Course Title" :value="$course->getTitle()" placeholder="e.g. Introduction to Programming" required />
             <x-form-input name="course_code" label="Course Code" :value="$course->getCourseCode()" placeholder="e.g. CS101" required />
             <x-form-input name="credit_hours" label="Credit Hours" type="number" :value="$course->getCreditHours()" required />
-            <x-form-select name="department_id" label="Department" :options="$departmentOptions" :selected="$course->getDepartmentId()" placeholder="-- No Department --" />
+            <x-form-select name="department_id" label="Department" :options="$departmentOptions" :selected="$course->getDepartmentId()" placeholder="-- Select Department --" required />
 
             <div class="form-divider"></div>
             <div class="form-actions">

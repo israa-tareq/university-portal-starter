@@ -100,7 +100,8 @@
                         <form action="{{ route('departments.destroy', $department->getId()) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn-delete">
+                            <button type="button" class="btn-delete"
+                                onclick="openDeleteConfirm(this.closest('form'), '{{ addslashes($department->getName()) }}', 'Department', 'Deleting this department will also affect all professors and courses assigned to it.')">
                                 <i data-lucide="trash-2"></i>
                             </button>
                         </form>

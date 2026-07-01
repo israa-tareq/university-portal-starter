@@ -5,12 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-/**
- * Lets a logged-in user edit their own name and profile picture.
- */
 class ProfileController extends Controller
 {
-    /** Show the "edit my profile" form. */
     public function edit(Request $request)
     {
         return view('profile.edit', [
@@ -18,30 +14,51 @@ class ProfileController extends Controller
         ]);
     }
 
-    /** Validate and persist the changes, including a new avatar upload. */
     public function update(Request $request)
     {
         $user = $request->user();
 
-        $data = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif,webp', 'max:2048'],
+        $request->validate([
+            'name'         => ['required', 'string', 'max:255'],
+            'avatar_b64'   => ['nullable', 'string'],
             'remove_avatar' => ['nullable', 'boolean'],
         ], [
             'name.required' => 'Please enter your name.',
-            'avatar.image' => 'The profile picture must be an image file.',
-            'avatar.max' => 'The profile picture may not be larger than 2MB.',
         ]);
 
-        $user->name = $data['name'];
+        $user->name = $request->input('name');
 
-        if ($request->hasFile('avatar')) {
-            // Replace the old file (if any) so we don't pile up orphaned uploads.
-            if ($user->avatar) {
-                Storage::disk('public')->delete($user->avatar);
+        if ($request->filled('avatar_b64')) {
+            $b64String = $request->input('avatar_b64');
+
+            // Expect: data:image/jpeg;base64,<data>
+            if (preg_match('/^data:(image\/(jpeg|png|gif|webp));base64,(.+)$/i', $b64String, $m)) {
+                $mimeType  = $m[1];
+                $imageData = base64_decode($m[3]);
+
+                if ($imageData !== false && strlen($imageData) <= 2 * 1024 * 1024) {
+                    $ext = match (strtolower($m[2])) {
+                        'jpeg'      => 'jpg',
+                        'png'       => 'png',
+                        'gif'       => 'gif',
+                        'webp'      => 'webp',
+                        default     => 'jpg',
+                    };
+
+                    $path = 'avatars/' . uniqid('avatar_', true) . '.' . $ext;
+
+                    if ($user->avatar) {
+                        Storage::disk('public')->delete($user->avatar);
+                    }
+
+                    Storage::disk('public')->put($path, $imageData);
+                    $user->avatar = $path;
+                } else {
+                    return back()->withErrors(['avatar' => 'The image must be smaller than 2 MB.']);
+                }
+            } else {
+                return back()->withErrors(['avatar' => 'Please upload a valid JPG, PNG, GIF, or WebP image.']);
             }
-
-            $user->avatar = $request->file('avatar')->store('avatars', 'public');
         } elseif ($request->boolean('remove_avatar') && $user->avatar) {
             Storage::disk('public')->delete($user->avatar);
             $user->avatar = null;

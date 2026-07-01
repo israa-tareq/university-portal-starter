@@ -33,8 +33,8 @@ Route::get('js/layout.js', fn() =>
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/profile',  [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::resource('departments', DepartmentController::class)->except('show');
     Route::resource('students',    StudentController::class)->except('show');

@@ -134,8 +134,58 @@
 
 </div>
 
+{{-- ════ DELETE CONFIRMATION MODAL ════ --}}
+<div class="confirm-modal-overlay" id="confirmModalOverlay">
+    <div class="confirm-modal">
+        <div class="confirm-modal-header">
+            <i data-lucide="alert-triangle"></i>
+            <span id="confirmModalTitle">Confirm Delete</span>
+        </div>
+        <div class="confirm-modal-body">
+            <p class="confirm-modal-message" id="confirmModalMessage"></p>
+            <p class="confirm-modal-warning" id="confirmModalWarning"></p>
+        </div>
+        <div class="confirm-modal-actions">
+            <button class="btn btn-secondary" id="confirmModalCancel">Cancel</button>
+            <button class="btn btn-danger" id="confirmModalConfirm">
+                <i data-lucide="trash-2"></i> Delete
+            </button>
+        </div>
+    </div>
+</div>
+
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <script src="{{ url('js/layout.js') }}"></script>
+<script>
+(function () {
+    var overlay   = document.getElementById('confirmModalOverlay');
+    var btnCancel = document.getElementById('confirmModalCancel');
+    var btnOk     = document.getElementById('confirmModalConfirm');
+    var elMsg     = document.getElementById('confirmModalMessage');
+    var elWarn    = document.getElementById('confirmModalWarning');
+    var elTitle   = document.getElementById('confirmModalTitle');
+    var pendingForm = null;
+
+    window.openDeleteConfirm = function (form, name, type, warning) {
+        pendingForm = form;
+        elTitle.textContent = 'Delete ' + (type || 'Item');
+        elMsg.textContent   = 'Are you sure you want to delete "' + name + '"?';
+        elWarn.textContent  = warning || 'This action cannot be undone and may affect related records.';
+        overlay.classList.add('active');
+    };
+
+    function closeModal() {
+        overlay.classList.remove('active');
+        pendingForm = null;
+    }
+
+    btnCancel.addEventListener('click', closeModal);
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
+    btnOk.addEventListener('click', function () {
+        if (pendingForm) { pendingForm.submit(); }
+    });
+})();
+</script>
 @stack('scripts')
 </body>
 </html>

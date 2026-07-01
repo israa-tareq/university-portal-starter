@@ -53,7 +53,8 @@
                     <form action="{{ route('courses.destroy', $course->getId()) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn-delete">
+                        <button type="button" class="btn-delete"
+                            onclick="openDeleteConfirm(this.closest('form'), '{{ addslashes($course->getTitle()) }}', 'Course', 'Deleting this course will remove all student enrollments linked to it.')">
                             <i data-lucide="trash-2"></i>
                         </button>
                     </form>

@@ -11,22 +11,21 @@
     </div>
 
     <x-card title="Edit My Profile">
-        <form action="{{ route('profile.update') }}" method="POST" class="module-form" enctype="multipart/form-data">
+        {{-- No enctype needed — image is sent as base64 text, not a file upload --}}
+        <form action="{{ route('profile.update') }}" method="POST" class="module-form" id="profileForm">
             @csrf
-            @method('PUT')
 
             <div class="profile-avatar-field">
                 <div class="profile-avatar-preview" id="avatarPreview">
                     @if($user->avatarUrl())
-                        <img src="{{ $user->avatarUrl() }}" alt="{{ $user->name }}" id="avatarPreviewImg">
+                        <img src="{{ $user->avatarUrl() }}" alt="{{ $user->name }}">
                     @else
-                        <span id="avatarPreviewInitials">
-                            {{ strtoupper(mb_substr($user->name, 0, 1)) }}
-                        </span>
+                        <span>{{ strtoupper(mb_substr($user->name, 0, 1)) }}</span>
                     @endif
                 </div>
+
                 <div class="profile-avatar-actions">
-                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('avatarInput').click()">
+                    <button type="button" class="btn btn-secondary" id="changePhotoBtn">
                         <i data-lucide="upload"></i> Change photo
                     </button>
                     @if($user->avatarUrl())
@@ -34,8 +33,14 @@
                             <input type="checkbox" name="remove_avatar" value="1"> Remove current photo
                         </label>
                     @endif
-                    <input type="file" id="avatarInput" name="avatar" accept="image/*" style="display:none" onchange="previewAvatar(this)">
+                    {{-- Hidden file picker — not submitted; JS reads & encodes to base64 --}}
+                    <input type="file" id="avatarInput" accept="image/jpeg,image/png,image/gif,image/webp" style="display:none">
                 </div>
+
+                {{-- Base64-encoded image data sent as a plain text field --}}
+                <input type="hidden" name="avatar_b64" id="avatar_b64">
+
+                <span class="form-error" id="avatarClientError" style="display:none"></span>
                 @error('avatar')
                     <span class="form-error">{{ $message }}</span>
                 @enderror
@@ -108,14 +113,48 @@
 
 @push('scripts')
 <script>
-    function previewAvatar(input) {
-        if (!input.files || !input.files[0]) return;
-        const reader = new FileReader();
+(function () {
+    var fileInput   = document.getElementById('avatarInput');
+    var b64Field    = document.getElementById('avatar_b64');
+    var preview     = document.getElementById('avatarPreview');
+    var clientError = document.getElementById('avatarClientError');
+    var changeBtn   = document.getElementById('changePhotoBtn');
+
+    changeBtn.addEventListener('click', function () {
+        fileInput.click();
+    });
+
+    fileInput.addEventListener('change', function () {
+        clientError.style.display = 'none';
+        clientError.textContent   = '';
+        b64Field.value            = '';
+
+        if (!this.files || !this.files[0]) return;
+        var file = this.files[0];
+
+        var allowed = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        if (!allowed.includes(file.type)) {
+            clientError.textContent = 'Please choose a JPG, PNG, GIF, or WebP image.';
+            clientError.style.display = '';
+            this.value = '';
+            return;
+        }
+
+        if (file.size > 2 * 1024 * 1024) {
+            clientError.textContent = 'This image is ' + (file.size / 1024 / 1024).toFixed(1) + ' MB — please choose a file under 2 MB.';
+            clientError.style.display = '';
+            this.value = '';
+            return;
+        }
+
+        var reader = new FileReader();
         reader.onload = function (e) {
-            const preview = document.getElementById('avatarPreview');
-            preview.innerHTML = '<img src="' + e.target.result + '" id="avatarPreviewImg">';
+            // Store the data URL in the hidden field so it's submitted as plain text
+            b64Field.value = e.target.result;
+            preview.innerHTML = '<img src="' + e.target.result + '">';
         };
-        reader.readAsDataURL(input.files[0]);
-    }
+        reader.readAsDataURL(file);
+    });
+})();
 </script>
 @endpush
