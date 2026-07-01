@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Concerns\HandlesAvatarUpload;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
  */
 class AuthController extends Controller
 {
+    use HandlesAvatarUpload;
+
     public static function middleware(): array
     {
         return []; // login + logout must be reachable without being logged in
@@ -71,18 +74,16 @@ class AuthController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'confirmed', 'min:6'],
-            'avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif,webp', 'max:2048'],
+            'avatar_b64' => ['nullable', 'string'],
         ], [
             'name.required' => 'Please enter your full name.',
             'email.unique' => 'An account with this email already exists.',
             'password.confirmed' => 'Password confirmation does not match.',
             'password.min' => 'Password must be at least 6 characters.',
-            'avatar.image' => 'The profile picture must be an image file.',
-            'avatar.max' => 'The profile picture may not be larger than 2MB.',
         ]);
 
-        $avatarPath = $request->hasFile('avatar')
-            ? $request->file('avatar')->store('avatars', 'public')
+        $avatarPath = $request->filled('avatar_b64')
+            ? $this->storeAvatarFromBase64($request->input('avatar_b64'))
             : null;
 
         $user = User::create([

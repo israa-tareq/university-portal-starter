@@ -117,6 +117,51 @@
     color: white;
 }
 
+/* ── Tabs ── */
+.module-tabs {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: 100%;
+    max-width: 720px;
+    margin-top: 16px;
+    border-bottom: 1px solid #e5e7eb;
+}
+.module-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    font-size: 0.85em;
+    font-family: inherit;
+    font-weight: 600;
+    color: #6b7280;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease;
+}
+.module-tab:hover {
+    color: #00393d;
+}
+.module-tab.active {
+    color: #964734;
+    border-bottom-color: #964734;
+}
+.tab-count {
+    background-color: #f3f4f6;
+    color: #6b7280;
+    font-size: 0.85em;
+    font-weight: 600;
+    padding: 1px 8px;
+    border-radius: 999px;
+}
+.module-tab.active .tab-count {
+    background-color: #B96A56;
+    color: white;
+}
+
 /* ── Display Card ── */
 .module-display-card {
     border: 1px solid #d1d5db;
@@ -197,6 +242,48 @@
     display: flex;
     align-items: center;
     gap: 8px;
+}
+.module-row-actions svg {
+    stroke: #9ca3af;
+    width: 16px;
+    height: 16px;
+}
+
+/* ── Student toggle (dropdown trigger) ── */
+.student-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    font: inherit;
+    text-align: left;
+}
+.dropdown-chevron {
+    transition: transform 0.15s ease;
+}
+.student-group.open .dropdown-chevron {
+    transform: rotate(180deg);
+}
+
+/* ── Student dropdown (course list) ── */
+.student-dropdown {
+    display: none;
+    background-color: #f9fafb;
+}
+.student-group.open .student-dropdown {
+    display: block;
+}
+.student-dropdown .course-row {
+    padding-left: 46px;
+    background-color: #f9fafb;
+}
+.student-dropdown .course-row:hover {
+    background-color: #f3f4f6;
+}
+
+/* ── Tab / search filtering ── */
+.student-group.hidden,
+.course-row.hidden-by-tab {
+    display: none !important;
 }
 .btn-edit,
 .btn-delete {

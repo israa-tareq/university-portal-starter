@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DTOs\EnrollmentDTO;
 use App\Services\CourseService;
 use App\Services\EnrollmentService;
 use App\Services\StudentService;
@@ -24,8 +25,30 @@ class EnrollmentController extends Controller
 
     public function index()
     {
+        // Every student appears once, carrying their full course list so the
+        // page can switch between All / In Progress / Passed and expand a
+        // student's courses entirely in JS, with no extra page loads.
+        $students = collect($this->enrollments->all())
+            ->groupBy(fn (EnrollmentDTO $e) => $e->getStudentId())
+            ->map(fn ($courses) => [
+                'id' => $courses->first()->getStudentId(),
+                'name' => $courses->first()->getStudentName(),
+                'courses' => $courses->map(fn (EnrollmentDTO $e) => [
+                    'id' => $e->getId(),
+                    'code' => $e->getCourseCode(),
+                    'title' => $e->getCourseTitle(),
+                    'grade' => $e->getGrade(),
+                    // There's no dedicated "status" column — a null grade
+                    // means the course is still in progress, any recorded
+                    // grade means it's passed.
+                    'status' => $e->getGrade() === null ? 'in_progress' : 'passed',
+                ])->values(),
+            ])
+            ->sortBy('name')
+            ->values();
+
         return view('enrollments.index', [
-            'enrollments' => $this->enrollments->all(),
+            'students' => $students,
         ]);
     }
 

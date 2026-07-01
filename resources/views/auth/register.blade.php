@@ -329,7 +329,7 @@
     <h1>Sign Up</h1>
     <p class="join-us-text">Join us today! It takes only a few steps</p>
 
-    <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('register') }}" method="POST">
       @csrf
       @if($errors->any())
         <div style="background:#fee2e2;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:13px;color:#dc2626;">
@@ -346,7 +346,12 @@
       <button class="upload-btn" type="button" onclick="document.getElementById('photoUpload').click()">
         <i class="bi bi-upload"></i> Upload photo
       </button>
-      <input type="file" id="photoUpload" name="avatar" accept="image/*" style="display: none;" onchange="previewPhoto(this)">
+      {{-- The file is never submitted directly: JS reads it and encodes it to base64
+           in the hidden field below, so it's sent as plain POST text rather than a
+           real multipart file upload (see HandlesAvatarUpload for why). --}}
+      <input type="file" id="photoUpload" accept="image/jpeg,image/png,image/gif,image/webp" style="display: none;" onchange="previewPhoto(this)">
+      <input type="hidden" name="avatar_b64" id="avatar_b64">
+      <div id="avatarClientError" style="display:none;color:#f8b4b4;font-size:12px;text-align:center;margin-top:6px;"></div>
 
       <hr class="divider">
 
@@ -392,14 +397,38 @@
     }
 
     function previewPhoto(input) {
+      const errorEl = document.getElementById('avatarClientError');
+      const b64Field = document.getElementById('avatar_b64');
+      errorEl.style.display = 'none';
+      errorEl.textContent = '';
+      b64Field.value = '';
+
       if (!input.files || !input.files[0]) return;
+      const file = input.files[0];
+
+      const allowed = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+      if (!allowed.includes(file.type)) {
+        errorEl.textContent = 'Please choose a JPG, PNG, GIF, or WebP image.';
+        errorEl.style.display = '';
+        input.value = '';
+        return;
+      }
+
+      if (file.size > 2 * 1024 * 1024) {
+        errorEl.textContent = 'This image is ' + (file.size / 1024 / 1024).toFixed(1) + ' MB — please choose a file under 2 MB.';
+        errorEl.style.display = '';
+        input.value = '';
+        return;
+      }
+
       const reader = new FileReader();
       reader.onload = function(e) {
+        b64Field.value = e.target.result;
         const preview = document.getElementById('selectedPreview');
         preview.style.backgroundColor = '';
         preview.innerHTML = '<img src="' + e.target.result + '" style="width:100%;height:100%;object-fit:cover;">';
       };
-      reader.readAsDataURL(input.files[0]);
+      reader.readAsDataURL(file);
     }
   </script>
 </body>
